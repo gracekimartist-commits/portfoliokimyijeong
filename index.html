@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KIM YI JEONG | Portfolio</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #ffffff;
+      color: #111111;
+      line-height: 1.6;
+    }
+
+    /* 1. 상단 헤더 */
+    header {
+      position: fixed;
+      top: 0; left: 0; width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(5px);
+      border-bottom: 1px solid #eaeaea;
+      padding: 20px 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 1000;
+    }
+    
+    header::before {
+      content: "";
+      flex: 1;
+    }
+
+    header .header-brand {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    header .sub-header { font-size: 10px; color: #888; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 2px; }
+    header h1 { font-size: 16px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 2px; }
+    header .dept { font-size: 10px; color: #aaa; letter-spacing: 1px; }
+
+    /* 2. 상단 우측 네비게이션 */
+    nav.top-nav {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+    nav.top-nav ul {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+    nav.top-nav a {
+      text-decoration: none;
+      font-size: 11px;
+      color: #111;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: opacity 0.2s ease;
+    }
+    nav.top-nav a:hover {
+      opacity: 0.5;
+    }
+
+    /* 메인 컨테이너 */
+    main { padding-top: 80px; }
+
+    /* 풀화면 히어로 비주얼 */
+    .hero-section {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-section img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    /* 공통 섹션 스타일 */
+    .content-section {
+      padding: 100px 60px 120px 60px;
+      border-bottom: 1px solid #f0f0f0;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .section-title {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+
+    /* ABOUT */
+    .about-container { display: flex; gap: 60px; align-items: flex-start; }
+    .about-img-box { flex: 0 0 320px; }
+    .about-img-box img { width: 100%; height: auto; display: block; }
+    .about-text-box { flex: 1; font-size: 13px; color: #333; line-height: 1.8; }
+    .about-text-box h2 { font-size: 15px; font-weight: 600; margin-bottom: 24px; }
+    .about-text-box p { margin-bottom: 20px; color: #444; word-break: keep-all; }
+    .download-cv { display: inline-block; margin-top: 20px; font-size: 12px; letter-spacing: 1px; color: #111; text-decoration: none; font-weight: 600; }
+
+    /* WORKS (대표 작품 슬라이드) */
+    .slider-container { display: flex; gap: 30px; overflow-x: auto; padding-bottom: 20px; }
+    .slider-container::-webkit-scrollbar { display: none; }
+    .work-item { flex: 0 0 auto; cursor: pointer; }
+    .work-item img { height: 460px; width: auto; object-fit: contain; display: block; transition: transform 0.2s ease; }
+    .work-item:hover img { transform: scale(1.02); }
+    .work-caption { margin-top: 12px; font-size: 11px; color: #555; letter-spacing: 1px; text-transform: uppercase; }
+
+    /* EXHIBITIONS */
+    .exhibitions-list { display: flex; flex-direction: column; gap: 60px; }
+    .exhibition-card { display: flex; gap: 50px; cursor: pointer; align-items: center; }
+    .exhibition-card:hover .exhibition-title { color: #555; }
+    .exhibition-thumb { flex: 0 0 380px; }
+    .exhibition-thumb img { width: 100%; height: auto; display: block; }
+    .exhibition-info { flex: 1; }
+    .exhibition-title { font-size: 16px; font-weight: 600; letter-spacing: 1.5px; margin-bottom: 8px; text-transform: uppercase; transition: color 0.2s; }
+    .exhibition-date { font-size: 12px; color: #888; letter-spacing: 1px; margin-bottom: 16px; }
+    .exhibition-desc { font-size: 13px; color: #555; line-height: 1.7; word-break: keep-all; margin-bottom: 20px; }
+
+    /* NEWS */
+    .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 30px; }
+    .news-card { display: flex; gap: 16px; }
+    .news-thumb { width: 100px; height: 100px; flex-shrink: 0; }
+    .news-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .news-info { display: flex; flex-direction: column; justify-content: space-between; }
+    .news-artist { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+    .news-desc { font-size: 11px; color: #666; line-height: 1.4; letter-spacing: 0.5px; text-transform: uppercase; }
+    .news-date { font-size: 10px; color: #aaa; letter-spacing: 1px; }
+
+    /* 공통 모달 뷰어 (WORKS & EXHIBITIONS 공유) */
+    .detail-view-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: #ffffff;
+      z-index: 2000;
+      overflow-y: auto;
+      padding: 100px 80px 80px 80px;
+    }
+    .detail-close-btn {
+      position: fixed;
+      top: 30px; right: 40px;
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      cursor: pointer;
+      text-transform: uppercase;
+      font-weight: 600;
+      border: 1px solid #111;
+      padding: 8px 16px;
+      background: #fff;
+      z-index: 2100;
+    }
+    .detail-container {
+      display: flex;
+      gap: 60px;
+      align-items: flex-start;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .detail-left-text { flex: 0 0 400px; font-size: 13px; color: #333; line-height: 1.8; position: sticky; top: 100px; }
+    .detail-artist-name { font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: #888; margin-bottom: 8px; }
+    .detail-title { font-size: 16px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+    .detail-subtitle { font-size: 11px; color: #888; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px; }
+    .detail-date { font-size: 11px; color: #aaa; margin-bottom: 24px; }
+    .detail-body-text { margin-bottom: 16px; word-break: keep-all; color: #444; font-size: 12px; }
+    
+    .detail-right-media { flex: 1; display: flex; flex-direction: column; gap: 40px; }
+    .media-item { width: 100%; }
+    .media-item img { width: 100%; height: auto; display: block; margin-bottom: 8px; }
+    .media-caption { font-size: 10px; color: #777; letter-spacing: 1px; text-transform: uppercase; line-height: 1.5; }
+
+    footer { padding: 40px 60px; text-align: center; font-size: 11px; color: #aaa; letter-spacing: 1px; }
+  </style>
+</head>
+<body>
+
+  <!-- 1. 상단 헤더 & 네비게이션 -->
+  <header>
+    <div class="header-brand">
+      <div class="sub-header">A Space for self-inquiry</div>
+      <h1>KIM YI JEONG 김이정</h1>
+      <div class="dept">Kookmin University Dept. of Painting</div>
+    </div>
+    <nav class="top-nav">
+      <ul>
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="#works">WORKS</a></li>
+        <li><a href="#exhibitions">EXHIBITIONS</a></li>
+        <li><a href="#news">NEWS</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- 풀화면 히어로 메인 비주얼 -->
+    <section class="hero-section">
+      <img src="main.jpg" alt="메인 비주얼 작품">
+    </section>
+
+    <!-- ABOUT 섹션 -->
+    <section id="about" class="content-section">
+      <h2 class="section-title">ABOUT</h2>
+      <div class="about-container">
+        <div class="about-img-box">
+          <img src="main.jpg" alt="작가 프로필">
+        </div>
+        <div class="about-text-box">
+          <h2>김이정</h2>
+          <p>
+            동시대 미술의 경계에서 물질성과 공간의 관계를 탐구하는 김이정은 국민대학교 회화과에서 작업을 이어가고 있다. 버려진 재료와 인공적 구조물의 이질적 결합을 통해 내면의 정적과 시각적 불협화음을 표현한다.
+          </p>
+          <p>
+            작가는 기억과 공간이 교차하는 지점을 회화와 입체 조형으로 확장하며, 사물이 가진 고유의 시간성과 변형 가능성에 주목한 자아 탐구의 공간을 구축해 나가고 있다.
+          </p>
+          <a href="#" class="download-cv">DOWNLOAD CV &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORKS 섹션 -->
+    <section id="works" class="content-section">
+      <h2 class="section-title">WORKS</h2>
+      <div class="slider-container">
+        <div class="work-item" onclick="openWorkDetail('growth')">
+          <img src="growth1.jpg" alt="성장 연작">
+          <div class="work-caption">KIM YI JEONG. GROWTH (성장), 2026.</div>
+        </div>
+        <div class="work-item" onclick="openWorkDetail('meditation')">
+          <img src="m3.jpg" alt="명상 연작">
+          <div class="work-caption">KIM YI JEONG. MEDITATION (명상), 2026.</div>
+        </div>
+        <div class="work-item" onclick="openWorkDetail('incongruous')">
+          <img src="diff1.jpg" alt="이질적으로">
+          <div class="work-caption">KIM YI JEONG. INCONGRUOUS, 2026.</div>
+        </div>
+        <div class="work-item" onclick="openWorkDetail('outdoor')">
+          <img src="out2.jpg" alt="야외 드로잉">
+          <div class="work-caption">KIM YI JEONG. OUTDOOR DRAWING I, 2026.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXHIBITIONS 섹션 -->
+    <section id="exhibitions" class="content-section">
+      <h2 class="section-title">EXHIBITIONS</h2>
+      <div class="exhibitions-list">
+        
+        <div class="exhibition-card" onclick="openExhibitionDetail('ex3')">
+          <div class="exhibition-thumb">
+            <img src="growth1.jpg" alt="성장 전시 이미지">
+          </div>
+          <div class="exhibition-info">
+            <div class="exhibition-title">GROWTH (성장)</div>
+            <div class="exhibition-date">2026년 6월 10일 - 8월 30일</div>
+            <div class="exhibition-desc">
+              구조적 선과 유기적 형태의 결합을 통해 생명체의 확장성과 불안정한 변형 과정을 탐구하는 입체 조형 연작 '성장'을 선보입니다.
+            </div>
+            <span style="font-size: 11px; font-weight:600; text-decoration: underline;">READ MORE &rarr;</span>
+          </div>
+        </div>
+
+        <div class="exhibition-card" onclick="openExhibitionDetail('ex1')">
+          <div class="exhibition-thumb">
+            <img src="diff1.jpg" alt="전시 1 이미지">
+          </div>
+          <div class="exhibition-info">
+            <div class="exhibition-title">ROAD MOVIE: ART BETWEEN KOREA AND JAPAN</div>
+            <div class="exhibition-date">2026년 5월 14일 - 9월 27일</div>
+            <div class="exhibition-desc">
+              신체 형상을 탐구하는 대표작과 초기 드로잉 연작이 함께 소개되는 그룹 전시로, 가상의 신체 구조와 공간의 이질적 관계를 조명합니다.
+            </div>
+            <span style="font-size: 11px; font-weight:600; text-decoration: underline;">READ MORE &rarr;</span>
+          </div>
+        </div>
+
+        <div class="exhibition-card" onclick="openExhibitionDetail('ex2')">
+          <div class="exhibition-thumb">
+            <img src="m3.jpg" alt="전시 2 이미지">
+          </div>
+          <div class="exhibition-info">
+            <div class="exhibition-title">MEDITATION (명상)</div>
+            <div class="exhibition-date">2026년 3월 21일 - 4월 30일</div>
+            <div class="exhibition-desc">
+              명상을 통해 마주한 내면의 존재에 관한 작업으로, 나무의 결을 따라 생성된 구조와 공간을 통해 생명성과 또 다른 자아를 다룹니다.
+            </div>
+            <span style="font-size: 11px; font-weight:600; text-decoration: underline;">READ MORE &rarr;</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- NEWS 섹션 -->
+    <section id="news" class="content-section">
+      <h2 class="section-title">NEWS</h2>
+      <div class="news-grid">
+        <div class="news-card">
+          <div class="news-thumb"><img src="growth1.jpg" alt="성장 소식"></div>
+          <div class="news-info">
+            <div class="news-artist">KIM YI JEONG</div>
+            <div class="news-desc">NEW SCULPTURE SERIES 'GROWTH' PRESENTED</div>
+            <div class="news-date">JUNE 10, 2026</div>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="news-thumb"><img src="m3.jpg" alt="소식"></div>
+          <div class="news-info">
+            <div class="news-artist">KIM YI JEONG</div>
+            <div class="news-desc">GROUP EXHIBITION AT KOOKMIN UNIV</div>
+            <div class="news-date">MAY 14, 2026</div>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="news-thumb"><img src="m3.jpg" alt="소식"></div>
+          <div class="news-info">
+            <div class="news-artist">KIM YI JEONG</div>
+            <div class="news-desc">NEW WORK SERIES RELEASED</div>
+            <div class="news-date">APRIL 20, 2026</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      &copy; 2026 KIM YI JEONG. ALL RIGHTS RESERVED.
+    </footer>
+  </main>
+
+  <!-- 통합 모달 -->
+  <div id="detailViewModal" class="detail-view-modal">
+    <button class="detail-close-btn" onclick="closeModal()">CLOSE &times;</button>
+    <div class="detail-container">
+      
+      <div class="detail-left-text">
+        <div class="detail-artist-name">KIM YI JEONG</div>
+        <div id="detailTitle" class="detail-title">작품 제목</div>
+        <div id="detailSubtitle" class="detail-subtitle">재료 및 규격</div>
+        <div id="detailDate" class="detail-date">2026</div>
+        <div id="detailTextContent"></div>
+      </div>
+
+      <div id="detailRightMedia" class="detail-right-media"></div>
+
+    </div>
+  </div>
+
+  <script>
+    const worksData = {
+      growth: {
+        title: "GROWTH (성장)",
+        subtitle: "Wire, Mixed Media, Variable Dimension",
+        date: "2026",
+        text: `
+          <p class="detail-body-text">첫 번째 작업을 진행하며 나는 왜 컴퍼스에 끌렸는지를 다시 생각하게 되었다. 컴퍼스가 상징하는 정확성과 기준은 오랫동안 내가 추구해 온 목표였지만, 동시에 벗어나고 싶었던 대상이기도 했다. 재현을 넘어 나만의 조형 언어를 찾으려 할 때마다, 기존의 습관과 기준은 하나의 틀이 되어 나를 붙잡고 있었다. 이 작품은 그러한 내적 갈등에서 출발하였다.</p>
+          <p class="detail-body-text">작품은 컴퍼스가 만들어 내는 완전한 원을 조형적 출발점으로 삼아, 그 원이 점차 확장되고 해체되는 과정을 표현하였다. 반복적으로 연결된 카드링은 처음에는 원의 형태를 유지하지만, 점차 벌어지고 확장되면서 원이 무너지는 모습으로 변화한다. 이는 내가 당연하게 받아들여 왔던 정확성과 기준이 흔들리고 변화하는 과정을 상징한다.</p>
+          <p class="detail-body-text">특히 원이 벌어지고 확장되는 모습은 성장 과정에서 허물을 벗는 뱀의 탈피와 연결하여 해석하였다. 탈피는 이전의 모습을 버리는 행위이면서, 동시에 새로운 단계로 나아가기 위한 과정이다. 작품 속 반복되는 원들은 뱀의 허물이자, 내가 오랫동안 의지해 왔던 기준들의 흔적으로 존재한다. 원이 정확성에 대한 상징적 대상이라면, 뱀의 비늘은 수세미의 형태적 특징에서 착안하였다. 수세미의 마름모 구조에서 뱀의 비늘과 유사한 형태를 발견하였고, 이를 조형 요소로 활용하였다. 또한 케이블타이는 작품의 구조를 지탱하는 중심축이 되어, 해체와 생성이 동시에 일어나는 상태를 표현하였다.</p>
+          <p class="detail-body-text">이 작품은 정확함을 향한 태도를 부정하거나 거부하는 작업이 아니다. 오랫동안 의지해 온 기준을 돌아보고, 그 안에서 벗어나기 위해 스스로를 변화시키며 나만의 기준을 만들어 가는 과정을 시각화한 작업이다.</p>
+        `,
+        items: [
+          { img: "growth1.jpg", caption: "KIM YI JEONG. GROWTH I, 2026." },
+          { img: "growth2.jpg", caption: "KIM YI JEONG. GROWTH II, 2026." },
+          { img: "growth3.jpg", caption: "KIM YI JEONG. GROWTH III, 2026." }
+        ]
+      },
+      meditation: {
+        title: "MEDITATION (명상)",
+        subtitle: "Wood, Mixed Media",
+        date: "2026",
+        text: `
+          <p class="detail-body-text">이 작품은 명상을 통해 마주한 내면의 존재에 관한 작업이다.</p>
+          <p class="detail-body-text">나는 오랫동안 몸으로 살아가는 나를 인식하며 살아왔다. 그러나 명상을 시작하면서 나를 바라보는 또 다른 존재에 대해 생각하게 되었다. 호흡에 집중하다 보면 어느 순간, 호흡은 내가 의식적으로 만들어 내는 것이 아니라는 감각이 찾아왔다. 그 경험은 나를 움직이고 살아가게 하는 존재에 대한 질문으로 자연스럽게 이어졌다.</p>
+          <p class="detail-body-text">나는 그 존재를 수호천사일 수도, 또 다른 나일 수도 있는 대상으로 상상하였다. 그리고 그 존재를 형상화하기 위해 자연의 재료인 나무를 선택하였다. 명상을 하며 창문 너머의 바람 소리와 자연의 냄새를 느끼는 경험은 내면을 마주하는 시간과 맞닿아 있었기 때문이다.</p>
+          <p class="detail-body-text">작품은 나무의 결을 따라 조각들을 이어 붙이며 구성하였고, 일부에는 작은 틈을 남겨 공기가 드나들 수 있도록 하였다. 이를 통해 생명성을 지닌 존재를 표현하고자 하였다. 잘려 있던 나무 조각들이 다시 일어서도록 구조를 만들었으며, 작품의 크기를 실제 나보다 크게 제작하여 나를 조용히 내려다보는 시선을 형상화하였다.</p>
+          <p class="detail-body-text">이 작품은 눈에 보이는 자아를 넘어, 나를 바라보고 이끌어 주는 또 다른 존재와의 만남을 기록한 작업이다.</p>
+        `,
+        items: [
+          { img: "m3.jpg", caption: "KIM YI JEONG. MEDITATION III, 2026." },
+          { img: "m2.jpg", caption: "KIM YI JEONG. MEDITATION II, 2026." },
+          { img: "m1.jpg", caption: "KIM YI JEONG. MEDITATION I, 2026." }
+        ]
+      },
+      incongruous: {
+        title: "INCONGRUOUS (이질적으로)",
+        subtitle: "Mixed Media, Dimensions Variable",
+        date: "2026",
+        text: `<p class="detail-body-text">이질적 재료의 조합을 통해 시각적 불협화음과 낯선 감각을 조명하는 작품입니다.</p>`,
+        items: [
+          { img: "diff1.jpg", caption: "KIM YI JEONG. INCONGRUOUS, 2026." }
+        ]
+      },
+      outdoor: {
+        title: "OUTDOOR DRAWING",
+        subtitle: "Paper, Charcoal",
+        date: "2026",
+        text: `<p class="detail-body-text">자연물과 공간의 시시각각 변화하는 형태를 담아낸 야외 드로잉 연작입니다.</p>`,
+        items: [
+          { img: "out2.jpg", caption: "KIM YI JEONG. OUTDOOR DRAWING I, 2026." },
+          { img: "out1.jpg", caption: "KIM YI JEONG. OUTDOOR DRAWING II, 2026." },
+          { img: "out3.jpg", caption: "KIM YI JEONG. OUTDOOR DRAWING III, 2026." },
+          { img: "out4.jpg", caption: "KIM YI JEONG. OUTDOOR DRAWING IV, 2026." }
+        ]
+      }
+    };
+
+    const exhibitionData = {
+      ex3: {
+        title: "GROWTH (성장)",
+        subtitle: "국민대학교 미술관",
+        date: "2026년 6월 10일 - 8월 30일",
+        text: `
+          <p class="detail-body-text">첫 번째 작업을 진행하며 나는 왜 컴퍼스에 끌렸는지를 다시 생각하게 되었다. 컴퍼스가 상징하는 정확성과 기준은 오랫동안 내가 추구해 온 목표였지만, 동시에 벗어나고 싶었던 대상이기도 했다. 재현을 넘어 나만의 조형 언어를 찾으려 할 때마다, 기존의 습관과 기준은 하나의 틀이 되어 나를 붙잡고 있었다. 이 작품은 그러한 내적 갈등에서 출발하였다.</p>
+          <p class="detail-body-text">작품은 컴퍼스가 만들어 내는 완전한 원을 조형적 출발점으로 삼아, 그 원이 점차 확장되고 해체되는 과정을 표현하였다. 반복적으로 연결된 카드링은 처음에는 원의 형태를 유지하지만, 점차 벌어지고 확장되면서 원이 무너지는 모습으로 변화한다. 이는 내가 당연하게 받아들여 왔던 정확성과 기준이 흔들리고 변화하는 과정을 상징한다.</p>
+          <p class="detail-body-text">특히 원이 벌어지고 확장되는 모습은 성장 과정에서 허물을 벗는 뱀의 탈피와 연결하여 해석하였다. 탈피는 이전의 모습을 버리는 행위이면서, 동시에 새로운 단계로 나아가기 위한 과정이다. 작품 속 반복되는 원들은 뱀의 허물이자, 내가 오랫동안 의지해 왔던 기준들의 흔적으로 존재한다. 원이 정확성에 대한 상징적 대상이라면, 뱀의 비늘은 수세미의 형태적 특징에서 착안하였다. 수세미의 마름모 구조에서 뱀의 비늘과 유사한 형태를 발견하였고, 이를 조형 요소로 활용하였다. 또한 케이블타이는 작품의 구조를 지탱하는 중심축이 되어, 해체와 생성이 동시에 일어나는 상태를 표현하였다.</p>
+          <p class="detail-body-text">이 작품은 정확함을 향한 태도를 부정하거나 거부하는 작업이 아니다. 오랫동안 의지해 온 기준을 돌아보고, 그 안에서 벗어나기 위해 스스로를 변화시키며 나만의 기준을 만들어 가는 과정을 시각화한 작업이다.</p>
+        `,
+        items: [
+          { img: "growth1.jpg", caption: "INSTALLATION VIEW. GROWTH I, KIM YI JEONG, 2026." }
+        ]
+      },
+      ex1: {
+        title: "ROAD MOVIE: ART BETWEEN KOREA AND JAPAN",
+        subtitle: "국립현대미술관, 과천",
+        date: "2026년 5월 14일 - 9월 27일",
+        text: `<p class="detail-body-text">김이정 작가의 연작과 초기 드로잉 작품이 국립현대미술관과 공동 주최하는 기획 전시에서 선보입니다.</p>`,
+        items: [
+          { img: "diff1.jpg", caption: "INSTALLATION VIEW. ROAD MOVIE, MMCA GWACHEON, 2026." }
+        ]
+      },
+      ex2: {
+        title: "MEDITATION (명상)",
+        subtitle: "BB&M Gallery",
+        date: "2026년 3월 21일 - 4월 30일",
+        text: `
+          <p class="detail-body-text">이 작품은 명상을 통해 마주한 내면의 존재에 관한 작업이다.</p>
+          <p class="detail-body-text">나는 오랫동안 몸으로 살아가는 나를 인식하며 살아왔다. 그러나 명상을 시작하면서 나를 바라보는 또 다른 존재에 대해 생각하게 되었다. 호흡에 집중하다 보면 어느 순간, 호흡은 내가 의식적으로 만들어 내는 것이 아니라는 감각이 찾아왔다. 그 경험은 나를 움직이고 살아가게 하는 존재에 대한 질문으로 자연스럽게 이어졌다.</p>
+          <p class="detail-body-text">나는 그 존재를 수호천사일 수도, 또 다른 나일 수도 있는 대상으로 상상하였다. 그리고 그 존재를 형상화하기 위해 자연의 재료인 나무를 선택하였다. 명상을 하며 창문 너머의 바람 소리와 자연의 냄새를 느끼는 경험은 내면을 마주하는 시간과 맞닿아 있었기 때문이다.</p>
+          <p class="detail-body-text">작품은 나무의 결을 따라 조각들을 이어 붙이며 구성하였고, 일부에는 작은 틈을 남겨 공기가 드나들 수 있도록 하였다. 이를 통해 생명성을 지닌 존재를 표현하고자 하였다. 잘려 있던 나무 조각들이 다시 일어서도록 구조를 만들었으며, 작품의 크기를 실제 나보다 크게 제작하여 나를 조용히 내려다보는 시선을 형상화하였다.</p>
+          <p class="detail-body-text">이 작품은 눈에 보이는 자아를 넘어, 나를 바라보고 이끌어 주는 또 다른 존재와의 만남을 기록한 작업이다.</p>
+        `,
+        items: [
+          { img: "m3.jpg", caption: "INSTALLATION VIEW. MEDITATION, GALLERY, 2026." }
+        ]
+      }
+    };
+
+    function openWorkDetail(key) {
+      const data = worksData[key];
+      if (!data) return;
+      renderModal(data);
+    }
+
+    function openExhibitionDetail(key) {
+      const data = exhibitionData[key];
+      if (!data) return;
+      renderModal(data);
+    }
+
+    function renderModal(data) {
+      document.getElementById('detailTitle').innerText = data.title;
+      document.getElementById('detailSubtitle').innerText = data.subtitle;
+      document.getElementById('detailDate').innerText = data.date;
+      document.getElementById('detailTextContent').innerHTML = data.text;
+
+      const mediaContainer = document.getElementById('detailRightMedia');
+      mediaContainer.innerHTML = '';
+
+      data.items.forEach(item => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'media-item';
+        itemDiv.innerHTML = `
+          <img src="${item.img}" alt="${item.caption}">
+          <div class="media-caption">${item.caption}</div>
+        `;
+        mediaContainer.appendChild(itemDiv);
+      });
+
+      document.getElementById('detailViewModal').style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('detailViewModal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeModal();
+    });
+  </script>
+
+</body>
+</html>
