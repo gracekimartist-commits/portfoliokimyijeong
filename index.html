@@ -185,16 +185,78 @@
 
     footer { padding: 40px 60px; text-align: center; font-size: 11px; color: #aaa; letter-spacing: 1px; }
 
-    /* ===== 반응형 모바일 디자인 ===== */
-    @media (max-width: 768px) {
-      html, body {
-        width: 100%;
-        overflow-x: hidden;
+    /* =========================
+       RESPONSIVE / MOBILE
+       ========================= */
+    img { max-width: 100%; }
+
+    @media (max-width: 900px) {
+      header {
+        padding: 14px 24px;
       }
 
+      header .sub-header {
+        font-size: 8px;
+        letter-spacing: 1.4px;
+      }
+
+      header h1 {
+        font-size: 14px;
+        letter-spacing: 1.5px;
+      }
+
+      header .dept {
+        font-size: 8px;
+        letter-spacing: 0.7px;
+      }
+
+      nav.top-nav ul {
+        gap: 16px;
+      }
+
+      nav.top-nav a {
+        font-size: 9px;
+        letter-spacing: 1.2px;
+      }
+
+      main {
+        padding-top: 70px;
+      }
+
+      .content-section {
+        padding: 72px 32px 84px;
+      }
+
+      .about-container {
+        gap: 36px;
+      }
+
+      .about-img-box {
+        flex-basis: 280px;
+      }
+
+      .news-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .detail-view-modal {
+        padding: 88px 36px 60px;
+      }
+
+      .detail-container {
+        gap: 36px;
+      }
+
+      .detail-left-text {
+        flex-basis: 300px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      /* Header: 모바일에서는 브랜드를 크게, 메뉴는 한 줄로 */
       header {
-        padding: 14px 18px 12px;
-        min-height: 72px;
+        padding: 12px 16px;
+        min-height: 62px;
       }
 
       header::before {
@@ -208,29 +270,28 @@
       }
 
       header .sub-header {
-        font-size: 8px;
-        letter-spacing: 1.4px;
-        margin-bottom: 1px;
-        white-space: nowrap;
+        display: none;
       }
 
       header h1 {
         font-size: 13px;
-        letter-spacing: 1.4px;
         line-height: 1.25;
+        letter-spacing: 1px;
+        margin: 0;
         white-space: nowrap;
       }
 
       header .dept {
-        font-size: 8px;
-        letter-spacing: .5px;
-        line-height: 1.2;
+        font-size: 7px;
+        line-height: 1.3;
+        letter-spacing: .4px;
+        margin-top: 2px;
         white-space: nowrap;
       }
 
       nav.top-nav {
         flex: 0 0 auto;
-        margin-left: 14px;
+        margin-left: 12px;
       }
 
       nav.top-nav ul {
@@ -239,36 +300,40 @@
 
       nav.top-nav a {
         font-size: 8px;
-        letter-spacing: 1px;
+        letter-spacing: .7px;
+        white-space: nowrap;
       }
 
       main {
-        padding-top: 72px;
+        padding-top: 62px;
       }
 
+      /* 모바일 히어로: 너무 긴 세로 이미지가 되지 않게 */
       .hero-section {
         width: 100%;
-        height: calc(100svh - 72px);
-        min-height: 430px;
+        height: calc(100svh - 62px);
+        min-height: 420px;
+        max-height: 760px;
       }
 
       .hero-section img {
         object-position: center center;
       }
 
+      /* 섹션 */
       .content-section {
         width: 100%;
-        padding: 58px 20px 70px;
+        padding: 58px 18px 68px;
       }
 
       .section-title {
         font-size: 11px;
-        letter-spacing: 1.8px;
+        letter-spacing: 1.5px;
         margin-bottom: 28px;
         padding-bottom: 8px;
       }
 
-      /* ABOUT */
+      /* ABOUT: 세로 배치 */
       .about-container {
         display: flex;
         flex-direction: column;
@@ -276,29 +341,28 @@
       }
 
       .about-img-box {
-        flex: none;
         width: 100%;
-        max-width: 100%;
+        flex: none;
       }
 
       .about-img-box img {
         width: 100%;
-        max-height: 70vh;
+        aspect-ratio: 4 / 3;
         object-fit: cover;
       }
 
       .about-text-box {
         font-size: 12px;
-        line-height: 1.8;
+        line-height: 1.85;
       }
 
       .about-text-box h2 {
         font-size: 14px;
-        margin-bottom: 18px;
+        margin-bottom: 16px;
       }
 
       .about-text-box p {
-        margin-bottom: 16px;
+        margin-bottom: 15px;
       }
 
       .download-cv {
@@ -306,38 +370,38 @@
         font-size: 10px;
       }
 
-      /* WORKS - 가로 스와이프 */
+      /* WORKS: 가로 스크롤은 유지하되 작품 크기를 모바일에 맞춤 */
       .slider-container {
         gap: 14px;
-        padding: 0 0 12px;
-        margin-right: -20px;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
+        padding: 0 0 14px;
+        margin-right: -18px;
+        padding-right: 18px;
         scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
       }
 
       .work-item {
-        width: calc(100vw - 58px);
-        flex: 0 0 calc(100vw - 58px);
+        width: min(76vw, 330px);
+        flex: 0 0 min(76vw, 330px);
         scroll-snap-align: start;
       }
 
       .work-item img {
         width: 100%;
-        height: 68vw;
-        max-height: 460px;
+        height: auto;
+        max-height: 68svh;
         object-fit: contain;
-        background: #f8f8f8;
       }
 
       .work-caption {
         margin-top: 9px;
         font-size: 9px;
-        line-height: 1.5;
-        letter-spacing: .7px;
+        line-height: 1.45;
+        letter-spacing: .6px;
+        white-space: normal;
       }
 
-      /* EXHIBITIONS */
+      /* EXHIBITIONS: 가로형 카드 → 세로형 카드 */
       .exhibitions-list {
         gap: 42px;
       }
@@ -346,7 +410,7 @@
         display: flex;
         flex-direction: column;
         align-items: stretch;
-        gap: 18px;
+        gap: 17px;
       }
 
       .exhibition-thumb {
@@ -369,7 +433,9 @@
 
       .exhibition-date {
         font-size: 10px;
-        margin-bottom: 12px;
+        line-height: 1.4;
+        letter-spacing: .6px;
+        margin-bottom: 11px;
       }
 
       .exhibition-desc {
@@ -382,20 +448,20 @@
         font-size: 9px !important;
       }
 
-      /* NEWS */
+      /* NEWS: 한 열로 깔끔하게 */
       .news-grid {
         grid-template-columns: 1fr;
-        gap: 28px;
+        gap: 24px;
       }
 
       .news-card {
         gap: 13px;
-        min-width: 0;
+        align-items: flex-start;
       }
 
       .news-thumb {
-        width: 82px;
-        height: 82px;
+        width: 78px;
+        height: 78px;
       }
 
       .news-artist {
@@ -406,29 +472,29 @@
       .news-desc {
         font-size: 9px;
         line-height: 1.45;
-        letter-spacing: .3px;
+        letter-spacing: .35px;
       }
 
       .news-date {
         font-size: 8px;
-        letter-spacing: .8px;
+        letter-spacing: .7px;
       }
 
       footer {
-        padding: 28px 20px;
-        font-size: 8px;
-        letter-spacing: .8px;
+        padding: 28px 18px;
+        font-size: 9px;
+        letter-spacing: .7px;
       }
 
-      /* DETAIL MODAL */
+      /* 모바일 모달 */
       .detail-view-modal {
-        padding: 76px 20px 40px;
+        padding: 76px 18px 42px;
         -webkit-overflow-scrolling: touch;
       }
 
       .detail-close-btn {
         top: 14px;
-        right: 18px;
+        right: 16px;
         font-size: 9px;
         letter-spacing: 1px;
         padding: 7px 11px;
@@ -442,29 +508,30 @@
       }
 
       .detail-left-text {
-        flex: none;
-        width: 100%;
         position: static;
-        font-size: 12px;
-        line-height: 1.8;
+        width: 100%;
+        flex: none;
+        font-size: 11px;
+        line-height: 1.75;
       }
 
       .detail-artist-name {
         font-size: 9px;
         letter-spacing: 1.2px;
-        margin-bottom: 6px;
+        margin-bottom: 5px;
       }
 
       .detail-title {
         font-size: 14px;
         line-height: 1.4;
-        letter-spacing: .8px;
-        margin-bottom: 6px;
+        letter-spacing: .7px;
+        margin-bottom: 5px;
       }
 
       .detail-subtitle {
         font-size: 9px;
-        line-height: 1.5;
+        line-height: 1.4;
+        letter-spacing: .7px;
       }
 
       .detail-date {
@@ -490,61 +557,58 @@
       .media-item img {
         width: 100%;
         height: auto;
-        max-height: none;
-        object-fit: contain;
       }
 
       .media-caption {
         font-size: 8px;
-        line-height: 1.45;
-        letter-spacing: .7px;
+        line-height: 1.5;
+        letter-spacing: .6px;
       }
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 380px) {
       header {
-        padding-left: 15px;
-        padding-right: 15px;
+        padding-left: 12px;
+        padding-right: 12px;
       }
 
       header h1 {
-        font-size: 12px;
+        font-size: 11px;
       }
 
-      header .sub-header,
       header .dept {
-        font-size: 7px;
+        font-size: 6px;
       }
 
       nav.top-nav ul {
-        gap: 8px;
+        gap: 7px;
       }
 
       nav.top-nav a {
         font-size: 7px;
-        letter-spacing: .8px;
-      }
-
-      .hero-section {
-        min-height: 400px;
+        letter-spacing: .4px;
       }
 
       .content-section {
-        padding-left: 17px;
-        padding-right: 17px;
+        padding-left: 15px;
+        padding-right: 15px;
       }
 
       .slider-container {
-        margin-right: -17px;
+        margin-right: -15px;
+        padding-right: 15px;
       }
 
       .work-item {
-        width: calc(100vw - 48px);
-        flex-basis: calc(100vw - 48px);
+        width: 80vw;
+        flex-basis: 80vw;
       }
+    }
 
-      .work-item img {
-        height: 72vw;
+    /* 터치 디바이스에서는 hover 확대를 제거해 오작동 방지 */
+    @media (hover: none) {
+      .work-item:hover img {
+        transform: none;
       }
     }
 
